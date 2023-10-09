@@ -1,0 +1,21 @@
+from pygame import *
+
+back = (129, 197, 111)
+win_w = 600
+win_h = 600
+win = display.set_mode((win_w, win_h))
+
+game = True
+finish = False
+clock = time.Clock()
+
+while game:
+    
+   for e in event.get():
+       if e.type == QUIT:
+           game = False
+   if finish != True:
+       win.fill(back)
+
+   display.update()
+   clock.tick(60)
