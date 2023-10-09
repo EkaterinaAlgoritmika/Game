@@ -1,5 +1,18 @@
 from pygame import *
 
+class Game_sprite(sprite.Sprite):
+    def __init__ (self, img, x, y, w, h, speed):
+        super().__init__()
+        self.image = transform.scale(image.load(img), (w, h))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.speed = speed
+    def reset(self):
+        win.blit(self.image, (self.rect.x, self.rect.y))
+
+ball = Game_sprite('ball.png', 200, 200, 50, 50, 20)
+
 back = (129, 197, 111)
 win_w = 600
 win_h = 600
@@ -8,14 +21,12 @@ win = display.set_mode((win_w, win_h))
 game = True
 finish = False
 clock = time.Clock()
-
 while game:
-    
-   for e in event.get():
-       if e.type == QUIT:
-           game = False
-   if finish != True:
-       win.fill(back)
-
-   display.update()
-   clock.tick(60)
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    if finish != True:
+        win.fill(back)
+        ball.reset()
+    display.update()
+    clock.tick(60)
